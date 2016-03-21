@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="homeApp" ng-controller="homeCtrl">
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/shared_services.js"></script>
+    <script type="text/javascript" src="js/home_app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <title></title>
+  </head>
+  <body class="body-less-padding">
+    <div ng-Include="template"></div>
+    <div class="jumbotron" id="home-jumb" ng-style="{'height': jumb_height}">
+      <div class="container" ng-style="{'padding-top': cont_padding}">
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="brand-name" id="home-jumb-text">Bloggies!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

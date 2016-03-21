@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="editPostApp" ng-controller="editPostCtrl">
+  <head>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/shared_services.js"></script>
+    <script type="text/javascript" src="js/edit_post_app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <title>Edit Post</title>
+  </head>
+  <body>
+    <div ng-Include="'user_navbar.html'"></div>
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-md-12 thin-border">
+          <form class="form" ng-submit="edit_post()">
+            <div data-ng-show="show_alert" class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" aria-label="Close" data-ng-click = "show_alert = false">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </button>
+              Post Successfully Updated!
+            </div>
+            <div class="form-group">
+              <label class="new-post-label">Post Title</label>
+              <input type="text" id="post-title-submit" ng-model="postSubmitForm.title" required />
+            </div>
+            <div class="form-group">
+              <label class="new-post-label">Post Text</label>
+              <textarea type="text" id="post-text-submit" ng-model="postSubmitForm.text" required>
+              </textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <span id="submit-cancel-space"></span>
+              <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br>
+    </div>
+  </body>
+</html>

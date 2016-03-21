@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="row">
+    <br>
+    <br>
+    <div class="col-md-12">
+      <p><u><a href="#/">Back to posts</a></u></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 thin-border">
+      <h2 id="view-post-title">{{ post.title }}</h2>
+    </div>
+    <div ng-if = "username != post.username" class="col-md-4 thin-border">
+      <h2></h2>
+      <h5>{{ post.date_added.split(' ')[0] }}</h5>
+    </div>
+    <div ng-if = "username == post.username" class="col-md-4 thin-border" style="height:79px">
+      <br>
+      <br>
+      <a class="no-underline" href="edit_post.html?{{ post.Post_ID }}">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true" style="height:30px;width:30px"></span>
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a class="no-underline" href="#/view_post" ng-click="delete_post()">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 thin-border">
+      <br>
+      <p id="view-post-text">{{ post.text }}</p>
+    </div>
+  </div>
+  <div ng-if="username != post.username" class="row">
+    <div class="col-md-7">
+      <br>
+      <h5>Author: {{ post.username }}</h5>
+    </div>
+  </div>
+  <div ng-if = "username == post.username" class="row">
+    <div class="col-md-7">
+      <br>
+      <h6 class="text-primary">Date Added: {{ post.date_added.split(' ')[0] }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <br>
+      <br>
+      <h5>Comments</h5>
+    </div>
+  </div>
+  <div class="container" ng-repeat="comment in comments | filter: {'replied_to': '0'} : true">
+    <div class="row">
+      <br>
+      <div class="col-md-4">
+        <p><b><u class="text-warning">{{ comment.username }}</u></b>&nbsp;&nbsp;&nbsp;&nbsp;{{ comment.date_added.split(' ')[0] }}</p>
+      </div>
+    </div>
+    <div class="row comment-text-row">
+      <div class="col-md-4">
+        <p class="comment-text">{{ comment.text }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <p><u><a href="#" class="reply-link" ng-click="comment_reply(comment)">Reply</a></u><span ng-show="username == comment.username">&nbsp;&nbsp;&nbsp;<u><a href="#" class="reply-link" ng-click="comment_delete(comment)">Delete</a></u></span></p>
+      </div>
+    </div>
+    <div class="row reply-text" ng-show="comment.reply_vis">
+      <form class="form" ng-submit="reply_submit(comment)">
+        <div class="form-group">
+          <textarea type="text" class="reply-text-submit" ng-model="comment.reply_text" required>
+          </textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <span id="submit-cancel-space"></span>
+          <button type="button" class="btn btn-danger" ng-click="comment.reply_vis = false">Cancel</button>
+        </div>
+      </form>
+      <br>
+    </div>
+    <div class="container reply" ng-repeat="reply1 in comments | filter: {'replied_to': comment.Comment_ID} : true">
+      <div class="row">
+        <div class="col-md-4">
+          <p><b><u class="text-warning">{{ reply1.username }}</u></b>&nbsp;&nbsp;&nbsp;&nbsp;{{ reply1.date_added.split(' ')[0] }}</p>
+        </div>
+      </div>
+      <div class="row comment-text-row">
+        <div class="col-md-4">
+          <p class="comment-text">{{ reply1.text }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <p><u><a href="#" class="reply-link" ng-click="comment_reply(reply1)">Reply</a></u><span ng-show="username == reply1.username">&nbsp;&nbsp;&nbsp;<u><a href="#" class="reply-link" ng-click="comment_delete(reply1)">Delete</a></u></span></p>
+        </div>
+      </div>
+      <div class="row reply-text" ng-show="reply1.reply_vis">
+        <form class="form" ng-submit="reply_submit(reply1)">
+          <div class="form-group">
+            <textarea type="text" class="reply-text-submit" ng-model="reply1.reply_text" required>
+            </textarea>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <span id="submit-cancel-space"></span>
+            <button type="button" class="btn btn-danger" ng-click="reply1.reply_vis = false">Cancel</button>
+          </div>
+        </form>
+        <br>
+      </div>
+      <div class="container reply" ng-repeat="reply2 in comments | filter: {'replied_to': reply1.Comment_ID} : true">
+        <div class="row">
+          <div class="col-md-4">
+            <p><b><u class="text-warning">{{ reply2.username }}</u></b>&nbsp;&nbsp;&nbsp;&nbsp;{{ reply2.date_added.split(' ')[0] }}</p>
+          </div>
+        </div>
+        <div class="row comment-text-row">
+          <div class="col-md-4">
+            <p class="comment-text">{{ reply2.text }}</p>
+          </div>
+        </div>
+        <div class="row" ng-show="username == reply2.username">
+          <div class="col-md-2">
+            <p><u><a href="#" class="reply-link" ng-click="comment_delete(reply2)">Delete</a></u></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <br>
+    <br>
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary" ng-click="new_comment()">
+        New Comment
+      </button>
+      <br>
+      <br>
+      <form class="form" ng-submit="comment_submit('0')" ng-show="cmt_txtarea_visible">
+        <div class="form-group">
+          <textarea type="text" id="comment-text-submit" ng-model="comment_text" required>
+          </textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <span id="submit-cancel-space"></span>
+          <button type="button" class="btn btn-danger" ng-click="cancel_comment()">Cancel</button>
+        </div>
+        <span id="white-space-new-cmt"></span>
+      </form>
+    </div>
+    <span id="white-space-cmt-btn" ng-hide="cmt_txtarea_visible"></span>
+  </div>
+</div>
+<div ng-if="show_popup">
+  <div ng-include="'popup.html'">
+  </div>
+</div>

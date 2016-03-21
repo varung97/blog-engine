@@ -1,0 +1,15 @@
+<nav class="pagination-nav">
+  <ul class="pagination">
+    <li>
+      <a href="#/" ng-click="get_posts(page_number - 1)" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="page in pages" ng-class="page == page_number ? 'active' : null"><a href="#/" ng-click="get_posts(page)">{{ page }}</a></li>
+    <li>
+      <a href="#/" ng-click="get_posts(page_number + 1)" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

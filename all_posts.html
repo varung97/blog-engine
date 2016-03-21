@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="allPostsApp">
+  <head>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/shared_services.js"></script>
+    <script type="text/javascript" src="js/all_posts_app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <title>All Posts</title>
+  </head>
+  <body>
+    <div ng-controller="navbarCtrl" ng-Include="template"></div>
+    <ng-view></ng-view>
+  </body>
+</html>

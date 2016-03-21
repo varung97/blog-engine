@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app='loginApp' ng-controller="loginCtrl">
+  <head>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/login_app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div ng-Include="'site_navbar.html'"></div>
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-md-6 thin-border">
+          <form class="form" ng-submit="login()">
+            <div data-ng-show="show_alert" class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" aria-label="Close" data-ng-click = "show_alert = false">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </button>
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              Cannot recognize either Username or Password
+            </div>
+            <div class="form-group">
+              <label>Username:</label>
+              <input type="text" class="form-control login-text-field"
+               ng-model="loginForm.username" required>
+            </div>
+            <div class="form-group">
+              <label>Password:</label>
+              <input type="password" class="form-control login-text-field"
+               ng-model="loginForm.password" required>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Login</button>
+              <div id="after-submit"></div>
+              <a href="signup.html">Sign Up</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br>
+    </div>
+  </body>
+</html>
